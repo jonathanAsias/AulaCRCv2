@@ -152,6 +152,26 @@ if ($ADMIN->fulltree) {
     $setting->set_updatedcallback('theme_aulav2_invalidate_caches');
     $page->add($setting);
 
+    $setting = new admin_setting_configtext(
+        'theme_aulav2/webcrc_url',
+        get_string('webcrc_url', 'theme_aulav2'),
+        get_string('webcrc_urldesc', 'theme_aulav2'),
+        'https://www.crcom.gov.co',
+        PARAM_URL
+    );
+    $setting->set_updatedcallback('theme_aulav2_invalidate_caches');
+    $page->add($setting);
+
+    $setting = new admin_setting_configtext(
+        'theme_aulav2/catalog_url',
+        get_string('catalog_url', 'theme_aulav2'),
+        get_string('catalog_urldesc', 'theme_aulav2'),
+        '',
+        PARAM_RAW_TRIMMED
+    );
+    $setting->set_updatedcallback('theme_aulav2_invalidate_caches');
+    $page->add($setting);
+
     $page->add(new admin_setting_heading(
         'theme_aulav2/general_heading_typography',
         get_string('settings_heading_typography', 'theme_aulav2'),
@@ -167,7 +187,7 @@ if ($ADMIN->fulltree) {
         'theme_aulav2/site_font',
         get_string('site_font', 'theme_aulav2'),
         get_string('site_fontdesc', 'theme_aulav2'),
-        'system',
+        'nunitosans',
         $fontchoices
     );
     $setting->set_updatedcallback('theme_aulav2_invalidate_caches');

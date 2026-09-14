@@ -1,0 +1,45 @@
+{{!
+    @template theme_aulav2/header
+    Mockup header: GOV.CO bar + centered CRC logo + site nav.
+}}
+<header class="aulav2-site-header" role="banner">
+    <div class="aulav2-govco-bar">
+        <div class="aulav2-wrap aulav2-govco-bar__inner">
+            <img class="aulav2-govco-bar__logo" src="{{home.pix.govco_logo}}" alt="gov.co">
+        </div>
+    </div>
+
+    <div class="aulav2-brand">
+        <div class="aulav2-wrap aulav2-brand__inner">
+            <a class="aulav2-brand__link" href="{{config.wwwroot}}/" aria-label="{{sitename}}">
+                {{#home.header_logo_url}}
+                    <img class="aulav2-brand__uploaded" src="{{home.header_logo_url}}" alt="{{sitename}}">
+                {{/home.header_logo_url}}
+                {{^home.header_logo_url}}
+                    <img class="aulav2-brand__crest" src="{{home.pix.crc_crest}}" alt="">
+                    <span class="aulav2-brand__wordmark">
+                        <img src="{{home.pix.crc_text}}" alt="CRC">
+                        <img src="{{home.pix.crc_sub}}" alt="{{#str}}footer_crc_fullname, theme_aulav2{{/str}}">
+                    </span>
+                {{/home.header_logo_url}}
+            </a>
+        </div>
+    </div>
+
+    <nav class="aulav2-mainnav" aria-label="{{#str}}mainnavigation, admin{{/str}}">
+        <div class="aulav2-wrap aulav2-mainnav__inner">
+            <ul class="aulav2-mainnav__list">
+                <li><a class="is-active" href="{{config.wwwroot}}/">{{#str}}nav_home, theme_aulav2{{/str}}</a></li>
+                <li><a href="{{home.catalog_url}}">{{#str}}nav_catalog, theme_aulav2{{/str}}</a></li>
+            </ul>
+            <div class="aulav2-mainnav__actions">
+                <a class="aulav2-mainnav__cta" href="{{home.webcrc_url}}" target="_blank" rel="noopener">{{#str}}nav_webcrc, theme_aulav2{{/str}}</a>
+                {{#usermenu}}
+                    <div class="aulav2-mainnav__user">
+                        {{> core/user_menu }}
+                    </div>
+                {{/usermenu}}
+            </div>
+        </div>
+    </nav>
+</header>

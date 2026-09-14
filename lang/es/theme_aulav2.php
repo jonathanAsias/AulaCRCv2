@@ -38,6 +38,14 @@ $string['site_font_opensans'] = 'Open Sans';
 $string['site_font_nunitosans'] = 'Nunito Sans';
 $string['site_font_poppins'] = 'Poppins';
 $string['site_font_customoption'] = 'Personalizada (Google Fonts)';
+$string['nav_home'] = 'Inicio';
+$string['nav_catalog'] = 'Catálogo de recursos';
+$string['nav_webcrc'] = 'Ir a la sede CRC';
+$string['webcrc_url'] = 'URL sede CRC';
+$string['webcrc_urldesc'] = 'Enlace del botón “Ir a la sede CRC” en la cabecera del home.';
+$string['catalog_url'] = 'URL del catálogo';
+$string['catalog_urldesc'] = 'Enlace de “Catálogo de recursos”. Vacío = listado de cursos de Moodle.';
+
 $string['site_font_custom'] = 'Nombre de fuente personalizada';
 $string['site_font_customdesc'] = 'Nombre de familia en Google Fonts (ej. Montserrat). Solo si eliges Personalizada.';
 $string['show_logo'] = 'Mostrar logo en la barra';

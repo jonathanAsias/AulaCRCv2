@@ -1,6 +1,12 @@
 # theme_aulav2 (AulaV2)
 
-Tema hijo de **Boost** (Moodle 4.5) con la portada del mockup Aula CRC. Independiente de `theme_aulacrc`: no hereda su chrome (GOV.CO kit, footer de columnas, login custom, etc.).
+Tema hijo de **Boost** (Moodle 4.5) con la portada del mockup Aula CRC. Independiente de `theme_aulacrc`.
+
+## 1.0.1
+
+- Cabecera del mockup en portada: barra GOV.CO, logo CRC centrado, menú (Inicio / Catálogo / Ir a la sede CRC).
+- La portada ya no usa la navbar Boost ni el layout drawers estándar.
+- Tipografía Nunito Sans por defecto; SCSS alineado al frame Figma.
 
 ## Instalación
 

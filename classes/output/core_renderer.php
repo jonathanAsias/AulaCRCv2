@@ -52,9 +52,13 @@ class core_renderer extends \theme_boost\output\core_renderer {
         if (!is_array($additionalclasses)) {
             $additionalclasses = explode(' ', (string) $additionalclasses);
         }
+        $additionalclasses[] = 'theme-aulav2';
         $sitefont = theme_aulav2_resolve_site_font(get_config('theme_aulav2'));
         if (!empty($sitefont['apply'])) {
             $additionalclasses[] = 'aulav2-site-font';
+        }
+        if ($this->page->pagelayout === 'frontpage') {
+            $additionalclasses[] = 'aulav2-frontpage';
         }
         return parent::body_attributes($additionalclasses);
     }

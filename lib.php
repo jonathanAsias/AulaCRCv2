@@ -189,15 +189,18 @@ function theme_aulav2_resolve_site_font($config): array {
  * @return string
  */
 function theme_aulav2_google_fonts_head_html(): string {
+    // Mockup uses Nunito Sans; also load any admin-selected Google font.
+    $families = ['Nunito Sans'];
     $font = theme_aulav2_resolve_site_font(get_config('theme_aulav2'));
-    if (empty($font['google'])) {
-        return '';
+    if (!empty($font['google']) && !in_array($font['google'], $families, true)) {
+        $families[] = $font['google'];
     }
-    $family = rawurlencode($font['google']);
-    $url = 'https://fonts.googleapis.com/css2?family=' . $family . ':wght@400;600;700;800&display=swap';
     $html = "\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n";
     $html .= "<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n";
-    $html .= '<link rel="stylesheet" href="' . s($url) . '">' . "\n";
+    foreach ($families as $family) {
+        $url = 'https://fonts.googleapis.com/css2?family=' . rawurlencode($family) . ':wght@400;500;600;700;800&display=swap';
+        $html .= '<link rel="stylesheet" href="' . s($url) . '">' . "\n";
+    }
     return $html;
 }
 
@@ -377,7 +380,29 @@ function theme_aulav2_pix_url(string $name): string {
 function theme_aulav2_get_frontpage_context(): array {
     global $CFG;
 
-    $webcrc = !empty($CFG->wwwroot) ? $CFG->wwwroot : '#';
+    $webcrc = get_config('theme_aulav2', 'webcrc_url');
+    if ($webcrc === false || trim((string) $webcrc) === '') {
+        $webcrc = 'https://www.crcom.gov.co';
+    }
+
+    $catalog = get_config('theme_aulav2', 'catalog_url');
+    if ($catalog === false || trim((string) $catalog) === '') {
+        $catalog = $CFG->wwwroot . '/course/index.php';
+    }
+
+    $headerlogo = '';
+    try {
+        $theme = \theme_config::load('aulav2');
+        $logourl = theme_aulav2_setting_moodle_url($theme, 'logocompact');
+        if (!$logourl) {
+            $logourl = theme_aulav2_setting_moodle_url($theme, 'logo');
+        }
+        if ($logourl) {
+            $headerlogo = (string) $logourl;
+        }
+    } catch (\Throwable $e) {
+        $headerlogo = '';
+    }
 
     return [
         'aulav2_frontpage' => true,
@@ -397,8 +422,10 @@ function theme_aulav2_get_frontpage_context(): array {
                 'govco_logo' => theme_aulav2_pix_url('govco-logo'),
                 'co_logo' => theme_aulav2_pix_url('co-logo'),
             ],
+            'header_logo_url' => $headerlogo,
             'search_placeholder' => get_string('search_placeholder', 'theme_aulav2'),
             'webcrc_url' => $webcrc,
+            'catalog_url' => $catalog,
             'audiences' => [
                 ['label' => get_string('audience_ciudadania', 'theme_aulav2')],
                 ['label' => get_string('audience_industria', 'theme_aulav2')],

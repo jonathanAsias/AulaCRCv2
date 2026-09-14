@@ -1,5 +1,6 @@
-﻿// AulaCRC layout v2 (mockup home). Scoped to body.pagelayout-frontpage.
+﻿// AulaV2 mockup home. Scoped to frontpage.
 
+body.pagelayout-frontpage.aulav2-frontpage,
 body.pagelayout-frontpage {
     --aulav2-govco: #0943b5;
     --aulav2-navy: #27348b;
@@ -13,29 +14,41 @@ body.pagelayout-frontpage {
     --aulav2-ph: #c4c4c4;
     --aulav2-tag-mute: #7e7e7e;
     --aulav2-max: 1380px;
+    --aulav2-font: "Nunito Sans", Verdana, system-ui, sans-serif;
 
-    // Hide Moodle chrome that fights the marketing home.
+    font-family: var(--aulav2-font);
+    background: #fff !important;
+    // Kill Boost fixed-navbar offset when mockup header replaces it.
+    padding-top: 0 !important;
+
+    // Hide Boost chrome on the marketing home.
+    .navbar,
+    .navbar.fixed-top,
     .drawer-toggles,
     #theme_boost-drawers-courseindex,
     #theme_boost-drawers-blocks,
     .secondary-navigation,
     #page-header,
-    #page-footer, .footer-popover {
+    #page-footer,
+    .footer-popover,
+    .editmode-switch-form,
+    .popover-region {
         display: none !important;
     }
 
-    // Frontpage blocks/courses injected at the main_content token (kept for Moodle).
     .aulav2-moodle-main {
         display: none !important;
     }
 
+    #page.aulav2-frontpage-page,
     #page.drawers,
     #page.drawers.show-drawer-left,
     #page.drawers.show-drawer-right {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
+        margin: 0 !important;
+        max-width: none !important;
     }
 
+    #topofscroll,
     #topofscroll.main-inner,
     .main-inner {
         max-width: none !important;
@@ -50,6 +63,173 @@ body.pagelayout-frontpage {
         padding: 0 !important;
         margin: 0 !important;
         max-width: none !important;
+    }
+
+    .aulav2-home,
+    .aulav2-site-header,
+    .aulav2-footer {
+        font-family: var(--aulav2-font);
+    }
+
+    // —— Mockup header ——
+    .aulav2-site-header {
+        position: relative;
+        z-index: 20;
+        background: #fff;
+    }
+
+    .aulav2-govco-bar {
+        background: var(--aulav2-govco);
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+    }
+
+    .aulav2-govco-bar__inner {
+        display: flex;
+        align-items: center;
+        min-height: 48px;
+        padding-block: 0.35rem;
+    }
+
+    .aulav2-govco-bar__logo {
+        height: 28px;
+        width: auto;
+        display: block;
+    }
+
+    .aulav2-brand {
+        background: #fff;
+        padding: 1.25rem 0 1rem;
+        border-bottom: 1px solid #eef2f8;
+    }
+
+    .aulav2-brand__inner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .aulav2-brand__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.85rem;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .aulav2-brand__crest {
+        height: 72px;
+        width: auto;
+    }
+
+    .aulav2-brand__wordmark {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+
+        img {
+            display: block;
+            height: auto;
+            max-width: 220px;
+        }
+
+        img:first-child {
+            height: 28px;
+            width: auto;
+        }
+
+        img:last-child {
+            height: 18px;
+            width: auto;
+            opacity: 0.95;
+        }
+    }
+
+    .aulav2-brand__uploaded {
+        max-height: 88px;
+        width: auto;
+        max-width: min(420px, 90vw);
+        object-fit: contain;
+    }
+
+    .aulav2-mainnav {
+        background: #eceff4;
+        border-bottom: 1px solid #d7dde8;
+    }
+
+    .aulav2-mainnav__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        min-height: 52px;
+    }
+
+    .aulav2-mainnav__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem 1.5rem;
+        align-items: center;
+
+        a {
+            color: var(--aulav2-ink);
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            padding: 0.85rem 0;
+            display: inline-block;
+            border-bottom: 3px solid transparent;
+
+            &:hover,
+            &:focus-visible,
+            &.is-active {
+                color: var(--aulav2-govco);
+                border-bottom-color: var(--aulav2-govco);
+                text-decoration: none;
+            }
+        }
+    }
+
+    .aulav2-mainnav__actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-left: auto;
+    }
+
+    .aulav2-mainnav__cta {
+        color: var(--aulav2-govco);
+        font-weight: 800;
+        font-size: 0.95rem;
+        text-decoration: none;
+        white-space: nowrap;
+
+        &:hover,
+        &:focus-visible {
+            text-decoration: underline;
+            color: var(--aulav2-govco);
+        }
+    }
+
+    .aulav2-mainnav__user {
+        .usermenu,
+        .dropdown-toggle,
+        .userbutton,
+        .login {
+            color: var(--aulav2-ink);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .avatar,
+        .userpicture {
+            width: 28px;
+            height: 28px;
+        }
     }
 
     .aulav2-wrap {
@@ -108,7 +288,7 @@ body.pagelayout-frontpage {
 
         &:hover,
         &:focus-visible {
-            background: darken(#0943b5, 6%);
+            background: #083a9c;
             color: #fff;
         }
     }
@@ -321,13 +501,21 @@ body.pagelayout-frontpage {
     .aulav2-series {
         display: grid;
         grid-template-columns: 140px 1fr;
-        gap: 1rem;
+        gap: 0;
         min-height: 150px;
+        align-items: stretch;
 
         .aulav2-ph {
             height: 100%;
             min-height: 150px;
             border-radius: 6px 0 0 6px;
+        }
+
+        .aulav2-card__pad {
+            padding: 0.85rem 1rem 0.85rem 0.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         h3 {
@@ -847,6 +1035,22 @@ body.pagelayout-frontpage {
         .aulav2-footer__top {
             flex-direction: column;
         }
+
+        .aulav2-mainnav__inner {
+            flex-direction: column;
+            align-items: flex-start;
+            padding-block: 0.5rem;
+        }
+
+        .aulav2-mainnav__actions {
+            margin-left: 0;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .aulav2-brand__crest {
+            height: 56px;
+        }
     }
 
     @media (max-width: 640px) {
@@ -857,6 +1061,10 @@ body.pagelayout-frontpage {
 
         .aulav2-series {
             grid-template-columns: 100px 1fr;
+        }
+
+        .aulav2-govco-bar__logo {
+            height: 22px;
         }
     }
 }
