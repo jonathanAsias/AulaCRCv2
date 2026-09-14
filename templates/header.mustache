@@ -1,6 +1,6 @@
 {{!
     @template theme_aulav2/header
-    Mockup header: GOV.CO bar + centered CRC logo + site nav.
+    Mockup header: GOV.CO + CRC logo + Moodle primary navigation.
 }}
 <header class="aulav2-site-header" role="banner">
     <div class="aulav2-govco-bar">
@@ -11,6 +11,13 @@
 
     <div class="aulav2-brand">
         <div class="aulav2-wrap aulav2-brand__inner">
+            <button class="navbar-toggler aabtn aulav2-hamburg d-md-none"
+                data-toggler="drawers"
+                data-action="toggle"
+                data-target="theme_boost-drawers-primary"
+                aria-label="{{#str}}sidepanel, core{{/str}}">
+                <span class="navbar-toggler-icon" aria-hidden="true"></span>
+            </button>
             <a class="aulav2-brand__link" href="{{config.wwwroot}}/" aria-label="{{sitename}}">
                 {{#home.header_logo_url}}
                     <img class="aulav2-brand__uploaded" src="{{home.header_logo_url}}" alt="{{sitename}}">
@@ -26,20 +33,28 @@
         </div>
     </div>
 
-    <nav class="aulav2-mainnav" aria-label="{{#str}}mainnavigation, admin{{/str}}">
+    <nav class="aulav2-mainnav" aria-label="{{#str}}sitemenubar, admin{{/str}}">
         <div class="aulav2-wrap aulav2-mainnav__inner">
-            <ul class="aulav2-mainnav__list">
-                <li><a class="is-active" href="{{config.wwwroot}}/">{{#str}}nav_home, theme_aulav2{{/str}}</a></li>
-                <li><a href="{{home.catalog_url}}">{{#str}}nav_catalog, theme_aulav2{{/str}}</a></li>
-            </ul>
+            {{#primarymoremenu}}
+                <div class="primary-navigation aulav2-primary-nav d-none d-md-flex flex-grow-1">
+                    {{> core/moremenu}}
+                </div>
+            {{/primarymoremenu}}
+
             <div class="aulav2-mainnav__actions">
-                <a class="aulav2-mainnav__cta" href="{{home.webcrc_url}}" target="_blank" rel="noopener">{{#str}}nav_webcrc, theme_aulav2{{/str}}</a>
-                {{#usermenu}}
-                    <div class="aulav2-mainnav__user">
+                <a class="aulav2-mainnav__cta d-none d-md-inline" href="{{home.webcrc_url}}" target="_blank" rel="noopener">{{#str}}nav_webcrc, theme_aulav2{{/str}}</a>
+                {{{ output.edit_switch }}}
+                {{#langmenu}}
+                    {{> theme_boost/language_menu }}
+                {{/langmenu}}
+                {{{ output.navbar_plugin_output }}}
+                <div class="d-flex align-items-stretch usermenu-container" data-region="usermenu">
+                    {{#usermenu}}
                         {{> core/user_menu }}
-                    </div>
-                {{/usermenu}}
+                    {{/usermenu}}
+                </div>
             </div>
         </div>
     </nav>
 </header>
+{{> theme_boost/primary-drawer-mobile }}

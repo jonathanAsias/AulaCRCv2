@@ -2,6 +2,11 @@
 
 Tema hijo de **Boost** (Moodle 4.5) con la portada del mockup Aula CRC. Independiente de `theme_aulacrc`.
 
+## 1.0.2
+
+- La franja de navegación del home muestra el menú primario de Moodle (Página principal, Administración del sitio, etc.), con menú móvil, usuario e idioma.
+- Se mantiene la cabecera mockup (GOV.CO + logo) y el CTA “Ir a la sede CRC”.
+
 ## 1.0.1
 
 - Cabecera del mockup en portada: barra GOV.CO, logo CRC centrado, menú (Inicio / Catálogo / Ir a la sede CRC).
