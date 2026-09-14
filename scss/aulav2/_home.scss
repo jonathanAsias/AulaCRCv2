@@ -1,0 +1,864 @@
+﻿// AulaCRC layout v2 (mockup home). Scoped to body.pagelayout-frontpage.
+
+body.pagelayout-frontpage {
+    --aulav2-govco: #0943b5;
+    --aulav2-navy: #27348b;
+    --aulav2-ink: #091e3f;
+    --aulav2-title: rgba(43, 38, 116, 0.9);
+    --aulav2-muted: #4c4c4c;
+    --aulav2-grey: #999;
+    --aulav2-border: #b5c7e9;
+    --aulav2-hero-bg: #e5ecf8;
+    --aulav2-soft: #f6f8f9;
+    --aulav2-ph: #c4c4c4;
+    --aulav2-tag-mute: #7e7e7e;
+    --aulav2-max: 1380px;
+
+    // Hide Moodle chrome that fights the marketing home.
+    .drawer-toggles,
+    #theme_boost-drawers-courseindex,
+    #theme_boost-drawers-blocks,
+    .secondary-navigation,
+    #page-header,
+    #page-footer, .footer-popover {
+        display: none !important;
+    }
+
+    // Frontpage blocks/courses injected at the main_content token (kept for Moodle).
+    .aulav2-moodle-main {
+        display: none !important;
+    }
+
+    #page.drawers,
+    #page.drawers.show-drawer-left,
+    #page.drawers.show-drawer-right {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    #topofscroll.main-inner,
+    .main-inner {
+        max-width: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+
+    #region-main-box,
+    #region-main,
+    #page-content {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: none !important;
+    }
+
+    .aulav2-wrap {
+        width: min(100% - 2rem, var(--aulav2-max));
+        margin-inline: auto;
+    }
+
+    .aulav2-ph {
+        background: var(--aulav2-ph);
+        border-radius: 6px;
+        width: 100%;
+    }
+
+    .aulav2-tag {
+        display: inline-flex;
+        align-items: center;
+        border: 1.5px solid var(--aulav2-border);
+        border-radius: 30px;
+        padding: 3px 12px;
+        background: #fff;
+        color: var(--aulav2-govco);
+        font-weight: 600;
+        font-size: 0.7rem;
+    }
+
+    .aulav2-tag--mute {
+        background: rgba(229, 236, 248, 0.46);
+        border-color: var(--aulav2-hero-bg);
+        color: var(--aulav2-tag-mute);
+    }
+
+    .aulav2-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 30px;
+        padding: 6px 16px;
+        font-weight: 700;
+        font-size: 1rem;
+        border: 1.3px solid var(--aulav2-govco);
+        background: #fff;
+        color: var(--aulav2-govco);
+        text-decoration: none;
+
+        &:hover,
+        &:focus-visible {
+            background: var(--aulav2-hero-bg);
+            color: var(--aulav2-govco);
+            text-decoration: none;
+        }
+    }
+
+    .aulav2-btn--solid {
+        background: var(--aulav2-govco);
+        color: #fff;
+
+        &:hover,
+        &:focus-visible {
+            background: darken(#0943b5, 6%);
+            color: #fff;
+        }
+    }
+
+    .aulav2-section-title {
+        margin: 0 0 1.75rem;
+        color: var(--aulav2-govco);
+        font-size: clamp(1.6rem, 2.5vw, 2.15rem);
+        font-weight: 800;
+    }
+
+    .aulav2-center-cta {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    // Hero
+    .aulav2-hero {
+        background: var(--aulav2-hero-bg);
+        padding: 3.5rem 0 4rem;
+    }
+
+    .aulav2-hero__grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 2.5rem;
+        align-items: start;
+    }
+
+    .aulav2-hero__eyebrow {
+        color: var(--aulav2-govco);
+        font-weight: 800;
+        font-size: 1.35rem;
+        margin: 0 0 0.75rem;
+    }
+
+    .aulav2-hero h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(2rem, 3.5vw, 3.1rem);
+        line-height: 1.15;
+        font-weight: 700;
+        color: var(--aulav2-ink);
+        max-width: 16ch;
+    }
+
+    .aulav2-hero__lead {
+        margin: 0 0 2rem;
+        font-size: 1.35rem;
+        font-weight: 600;
+        max-width: 36ch;
+        color: var(--aulav2-ink);
+    }
+
+    .aulav2-search {
+        display: flex;
+        align-items: center;
+        background: #fff;
+        border: 1px solid var(--aulav2-border);
+        border-radius: 41px;
+        padding: 7px 8px 7px 21px;
+        max-width: 634px;
+        gap: 0.75rem;
+
+        input {
+            flex: 1;
+            border: 0;
+            outline: 0;
+            font: 400 0.95rem Verdana, sans-serif;
+            background: transparent;
+            color: var(--aulav2-ink);
+
+            &::placeholder {
+                color: var(--aulav2-grey);
+            }
+        }
+
+        button {
+            width: 41px;
+            height: 41px;
+            border: 0;
+            border-radius: 50%;
+            background: #333;
+            color: #fff;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            min-width: 41px;
+            min-height: 41px;
+        }
+    }
+
+    .aulav2-tags-label {
+        margin: 1.25rem 0 0.5rem;
+        font: 400 0.95rem Verdana, sans-serif;
+    }
+
+    .aulav2-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .aulav2-hero-card {
+        margin-top: 3rem;
+
+        .aulav2-ph {
+            height: 305px;
+        }
+
+        h2 {
+            margin: 0.75rem 0 0;
+            text-align: center;
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--aulav2-title);
+            line-height: 1.25;
+        }
+    }
+
+    // Audiences
+    .aulav2-audiences {
+        padding: 3rem 0;
+    }
+
+    .aulav2-audiences__grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1.25rem;
+    }
+
+    .aulav2-audience {
+        background: var(--aulav2-navy);
+        color: #fff;
+        border-radius: 7px;
+        min-height: 112px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 1rem;
+        font-weight: 700;
+        font-size: 0.95rem;
+        line-height: 1.25;
+        text-decoration: none;
+
+        &:hover,
+        &:focus-visible {
+            color: #fff;
+            filter: brightness(1.08);
+            text-decoration: none;
+        }
+    }
+
+    // Collections
+    .aulav2-collections {
+        padding: 3rem 0;
+    }
+
+    .aulav2-collections__layout {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 1.5rem;
+    }
+
+    .aulav2-card {
+        border: 1.5px solid var(--aulav2-border);
+        border-radius: 7px;
+        background: #fff;
+        overflow: hidden;
+    }
+
+    .aulav2-card__pad {
+        padding: 0.75rem;
+    }
+
+    .aulav2-featured .aulav2-ph {
+        height: 280px;
+        border-radius: 6px 6px 0 0;
+    }
+
+    .aulav2-card h3 {
+        margin: 0.5rem 0;
+        font-size: 1.4rem;
+        color: var(--aulav2-title);
+        font-weight: 700;
+        line-height: 1.25;
+    }
+
+    .aulav2-meta {
+        color: var(--aulav2-grey);
+        font-weight: 700;
+        font-size: 0.95rem;
+        margin: 0.35rem 0;
+    }
+
+    .aulav2-desc {
+        color: var(--aulav2-muted);
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin: 0 0 1rem;
+    }
+
+    .aulav2-series-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .aulav2-series {
+        display: grid;
+        grid-template-columns: 140px 1fr;
+        gap: 1rem;
+        min-height: 150px;
+
+        .aulav2-ph {
+            height: 100%;
+            min-height: 150px;
+            border-radius: 6px 0 0 6px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+        }
+    }
+
+    // Temas
+    .aulav2-temas {
+        background: var(--aulav2-soft);
+        padding: 3rem 0;
+    }
+
+    .aulav2-temas__grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.25rem;
+    }
+
+    .aulav2-tema {
+        background: #fff;
+        border: 1.5px solid var(--aulav2-hero-bg);
+        border-radius: 9px;
+        padding: 1.25rem 1.5rem 1.25rem 1rem;
+        display: grid;
+        grid-template-columns: 4px 1fr;
+        gap: 0.75rem;
+        min-height: 173px;
+    }
+
+    .aulav2-tema__bar {
+        background: var(--aulav2-title);
+        border-radius: 0 9px 9px 0;
+    }
+
+    .aulav2-tema h3 {
+        margin: 0.5rem 0 0.4rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--aulav2-muted);
+    }
+
+    .aulav2-tema p {
+        margin: 0 0 1rem;
+        font-size: 0.8rem;
+        color: var(--aulav2-muted);
+        font-weight: 500;
+    }
+
+    .aulav2-tema__count {
+        color: var(--aulav2-govco);
+        font-weight: 700;
+        font-size: 0.95rem;
+    }
+
+    .aulav2-tema__icon {
+        width: 34px;
+        height: 34px;
+        color: var(--aulav2-navy);
+    }
+
+    // Ruta
+    .aulav2-ruta {
+        background: var(--aulav2-navy);
+        color: #fff;
+        padding: 3.5rem 0;
+    }
+
+    .aulav2-ruta__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+        align-items: center;
+    }
+
+    .aulav2-ruta h2 {
+        margin: 0 0 1rem;
+        font-size: clamp(1.75rem, 3vw, 2.4rem);
+        font-weight: 800;
+        line-height: 1.15;
+        color: #fff;
+    }
+
+    .aulav2-ruta__lead {
+        margin: 0 0 1.5rem;
+        font-size: 1.05rem;
+        font-weight: 500;
+        max-width: 40ch;
+    }
+
+    .aulav2-ruta-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+    }
+
+    .aulav2-ruta-item {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        border: 1.5px solid var(--aulav2-border);
+        border-radius: 7px;
+        padding: 0.55rem;
+    }
+
+    .aulav2-ruta-item__thumb {
+        width: 36px;
+        height: 36px;
+        border-radius: 4px;
+        background: var(--aulav2-ph);
+        flex-shrink: 0;
+    }
+
+    .aulav2-ruta-item strong {
+        display: block;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #fff;
+    }
+
+    .aulav2-ruta-item span {
+        color: var(--aulav2-hero-bg);
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
+
+    // Recomendados
+    .aulav2-rec {
+        padding: 3rem 0;
+    }
+
+    .aulav2-rec__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .aulav2-rec-card .aulav2-ph {
+        height: 185px;
+        border-radius: 6px 6px 0 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        padding: 9px;
+    }
+
+    .aulav2-badge {
+        background: var(--aulav2-border);
+        border-radius: 5px;
+        padding: 3px 6px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: #000;
+    }
+
+    .aulav2-rec-card h3 {
+        margin: 0.5rem 0;
+        font-size: 1.2rem;
+        color: var(--aulav2-title);
+        line-height: 1.2;
+    }
+
+    .aulav2-rec-card .aulav2-desc {
+        font-size: 0.85rem;
+    }
+
+    // FAQ
+    .aulav2-faqs {
+        padding: 2.5rem 0 3rem;
+    }
+
+    .aulav2-faq-frame {
+        width: min(100% - 2rem, 1139px);
+        margin-inline: auto;
+        display: grid;
+        grid-template-columns: minmax(0, 700px) minmax(280px, 1fr);
+        gap: 2rem;
+        align-items: start;
+        min-height: 300px;
+    }
+
+    .aulav2-faq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 700px;
+    }
+
+    .aulav2-faq-item {
+        border: 1.5px solid #b5c7e9;
+        border-radius: 7px;
+        padding: 7px;
+        display: flex;
+        gap: 7px;
+        align-items: flex-start;
+        background: transparent;
+        width: 100%;
+        text-align: left;
+        font: inherit;
+        cursor: pointer;
+        box-sizing: border-box;
+
+        &.is-open {
+            background: #fff;
+            min-height: 114px;
+        }
+    }
+
+    .aulav2-faq-item__icon {
+        width: 39px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+
+        img {
+            width: 32px;
+            height: 32px;
+            display: block;
+        }
+    }
+
+    .aulav2-faq-item__body {
+        flex: 1;
+        min-width: 0;
+        padding-top: 3px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .aulav2-faq-item strong {
+        display: block;
+        font-size: 19px;
+        line-height: 26px;
+        color: rgba(43, 38, 116, 0.9);
+        font-weight: 700;
+    }
+
+    .aulav2-faq-item.is-open strong {
+        color: #0943b5;
+        text-decoration: underline;
+        text-underline-position: from-font;
+    }
+
+    .aulav2-faq-item p {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 500;
+        color: #000;
+        max-width: 455px;
+        display: none;
+    }
+
+    .aulav2-faq-item.is-open p {
+        display: block;
+    }
+
+    .aulav2-faq-title {
+        margin: 46px 0 0;
+        color: #0943b5;
+        font-size: 36.019px;
+        font-weight: 800;
+        line-height: normal;
+    }
+
+    // Footer v2
+    .aulav2-footer {
+        margin-top: 2.5rem;
+        background: #fff;
+        position: relative;
+    }
+
+    .aulav2-footer__shell {
+        position: relative;
+        padding: 0 0 52px;
+    }
+
+    .aulav2-footer__shell::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 164px;
+        bottom: 0;
+        background-image: linear-gradient(169.89deg, rgb(23, 19, 79) 46.243%, rgb(46, 41, 123) 118.39%);
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .aulav2-footer__card-wrap {
+        width: min(100% - 2rem, 1377px);
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+    }
+
+    .aulav2-footer__card {
+        background: #fff;
+        border: 1.5px solid #b5c7e9;
+        border-radius: 7px;
+        padding: 70px 72px 48px;
+        box-sizing: border-box;
+    }
+
+    .aulav2-footer__top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 2rem;
+        margin-bottom: 24px;
+    }
+
+    .aulav2-footer__title {
+        margin: 0;
+        max-width: 782px;
+        color: #0943b5;
+        font-size: 28.18px;
+        font-weight: 800;
+    }
+
+    .aulav2-footer__logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-shrink: 0;
+    }
+
+    .aulav2-footer__logo .crest {
+        width: 92px;
+        height: 97px;
+        object-fit: contain;
+    }
+
+    .aulav2-footer__wordmark {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        img:first-child {
+            width: 148px;
+            height: 51px;
+            object-fit: contain;
+        }
+
+        img:last-child {
+            width: 123px;
+            height: 34px;
+            object-fit: contain;
+        }
+    }
+
+    .aulav2-footer__info {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        max-width: 782px;
+    }
+
+    .aulav2-footer__block {
+        h3 {
+            margin: 0 0 10px;
+            font-size: 19px;
+            font-weight: 700;
+            color: #434f59;
+        }
+
+        p {
+            margin: 0 0 8px;
+            font-size: 19px;
+            font-weight: 600;
+            color: #4b4b4b;
+        }
+
+        a.mail {
+            color: #0943b5;
+            text-decoration: underline;
+            text-underline-position: from-font;
+            font-weight: 600;
+        }
+    }
+
+    .aulav2-footer__prai h3 {
+        color: #4b4b4b;
+        font-size: 20.77px;
+        margin-bottom: 12px;
+    }
+
+    .aulav2-footer__prai img {
+        width: 147px;
+        height: 77px;
+        object-fit: contain;
+        display: block;
+    }
+
+    .aulav2-footer__legal {
+        margin: 28px 0 24px;
+        font-size: 19px;
+        font-weight: 400;
+        color: #000;
+        max-width: 1163px;
+    }
+
+    .aulav2-footer__social {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+        margin-bottom: 28px;
+
+        > span {
+            font-size: 20.77px;
+            font-weight: 800;
+            color: #434f59;
+        }
+    }
+
+    .aulav2-footer__social-icons {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        img {
+            width: 32.63px;
+            height: 32.63px;
+            display: block;
+        }
+    }
+
+    .aulav2-footer__btns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+
+        a {
+            background: #fff;
+            border: 1.3px solid #0943b5;
+            border-radius: 30px;
+            padding: 6px 16px;
+            color: #0943b5;
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            white-space: nowrap;
+
+            &:hover,
+            &:focus-visible {
+                background: var(--aulav2-hero-bg);
+                text-decoration: none;
+            }
+        }
+    }
+
+    .aulav2-govco-foot {
+        position: relative;
+        z-index: 2;
+        background: #0943b5;
+        height: 75px;
+        display: flex;
+        align-items: center;
+        padding-left: clamp(1rem, 7vw, 115px);
+        gap: 20px;
+
+        img.govco {
+            height: 37px;
+            width: auto;
+            display: block;
+        }
+
+        .sep {
+            width: 1px;
+            height: 54px;
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        img.co {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+            display: block;
+        }
+    }
+
+    @media (max-width: 1100px) {
+        .aulav2-hero__grid,
+        .aulav2-collections__layout,
+        .aulav2-ruta__grid,
+        .aulav2-faq-frame {
+            grid-template-columns: 1fr;
+        }
+
+        .aulav2-audiences__grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .aulav2-temas__grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .aulav2-rec__grid {
+            grid-template-columns: 1fr;
+        }
+
+        .aulav2-faq-title {
+            margin-top: 0;
+        }
+
+        .aulav2-footer__shell::before {
+            top: 80px;
+        }
+
+        .aulav2-footer__card {
+            padding: 2rem 1.5rem;
+        }
+
+        .aulav2-footer__top {
+            flex-direction: column;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .aulav2-audiences__grid,
+        .aulav2-temas__grid {
+            grid-template-columns: 1fr;
+        }
+
+        .aulav2-series {
+            grid-template-columns: 100px 1fr;
+        }
+    }
+}
+
+

@@ -1,0 +1,18 @@
+// Post-Boost SCSS for theme_aulav2.
+
+.navbar.fixed-top {
+    background-color: var(--aulav2-navbar-bg, #fff) !important;
+    color: var(--aulav2-navbar-color, #1d2433);
+
+    .navbar-brand,
+    .nav-link,
+    .dropdown-toggle,
+    .btn,
+    .icon {
+        color: inherit;
+    }
+}
+
+body.aulav2-site-font {
+    font-family: var(--aulav2-font-family);
+}

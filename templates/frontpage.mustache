@@ -1,0 +1,221 @@
+﻿{{!
+    @template theme_aulav2/frontpage
+    AulaV2 mockup homepage.
+}}
+<div class="aulav2-home" data-region="aulav2-frontpage">
+    <section class="aulav2-hero">
+        <div class="aulav2-wrap aulav2-hero__grid">
+            <div>
+                <p class="aulav2-hero__eyebrow">{{#str}}hero_eyebrow, theme_aulav2{{/str}}</p>
+                <h1>{{#str}}hero_title, theme_aulav2{{/str}}</h1>
+                <p class="aulav2-hero__lead">{{#str}}hero_lead, theme_aulav2{{/str}}</p>
+                <form class="aulav2-search" role="search" action="{{config.wwwroot}}/course/search.php" method="get">
+                    <input type="search" name="search" placeholder="{{home.search_placeholder}}" aria-label="{{#str}}search, core{{/str}}">
+                    <button type="submit" aria-label="{{#str}}search, core{{/str}}">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                            <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
+                        </svg>
+                    </button>
+                </form>
+                <p class="aulav2-tags-label">{{#str}}search_frequent, theme_aulav2{{/str}}</p>
+                <div class="aulav2-tags">
+                    {{#home.search_tags}}
+                    <span class="aulav2-tag">{{.}}</span>
+                    {{/home.search_tags}}
+                </div>
+            </div>
+            <article class="aulav2-hero-card">
+                <div class="aulav2-ph" role="img" aria-label="{{#str}}hero_featured, theme_aulav2{{/str}}"></div>
+                <h2>{{#str}}hero_featured, theme_aulav2{{/str}}</h2>
+            </article>
+        </div>
+    </section>
+
+    <section class="aulav2-audiences">
+        <div class="aulav2-wrap">
+            <h2 class="aulav2-section-title">{{#str}}audiences_title, theme_aulav2{{/str}}</h2>
+            <div class="aulav2-audiences__grid">
+                {{#home.audiences}}
+                <a class="aulav2-audience" href="#">{{{label}}}</a>
+                {{/home.audiences}}
+            </div>
+        </div>
+    </section>
+
+    <section class="aulav2-collections">
+        <div class="aulav2-wrap">
+            <h2 class="aulav2-section-title">{{#str}}collections_title, theme_aulav2{{/str}}</h2>
+            <div class="aulav2-collections__layout">
+                <article class="aulav2-card aulav2-featured">
+                    <div class="aulav2-ph"></div>
+                    <div class="aulav2-card__pad">
+                        <div class="aulav2-tags" style="margin-bottom:0.75rem">
+                            <span class="aulav2-tag">{{#str}}tag_certificado, theme_aulav2{{/str}}</span>
+                            <span class="aulav2-tag aulav2-tag--mute">{{#str}}tag_tematica, theme_aulav2{{/str}}</span>
+                            <span class="aulav2-tag aulav2-tag--mute">{{#str}}tag_formato, theme_aulav2{{/str}}</span>
+                        </div>
+                        <h3>{{#str}}collection_featured_title, theme_aulav2{{/str}}</h3>
+                        <p class="aulav2-meta">{{#str}}collection_featured_meta, theme_aulav2{{/str}}</p>
+                        <p class="aulav2-desc">{{#str}}collection_featured_desc, theme_aulav2{{/str}}</p>
+                        <a class="aulav2-btn" href="#">{{#str}}explore_collection, theme_aulav2{{/str}}</a>
+                    </div>
+                </article>
+                <div class="aulav2-series-stack">
+                    <article class="aulav2-card aulav2-series">
+                        <div class="aulav2-ph"></div>
+                        <div class="aulav2-card__pad">
+                            <p class="aulav2-meta">{{#str}}series_1_meta, theme_aulav2{{/str}}</p>
+                            <h3>{{#str}}series_1_title, theme_aulav2{{/str}}</h3>
+                            <p class="aulav2-desc">{{#str}}series_1_desc, theme_aulav2{{/str}}</p>
+                            <a class="aulav2-btn" href="#">{{#str}}explore, theme_aulav2{{/str}}</a>
+                        </div>
+                    </article>
+                    <article class="aulav2-card aulav2-series">
+                        <div class="aulav2-ph"></div>
+                        <div class="aulav2-card__pad">
+                            <p class="aulav2-meta">{{#str}}series_2_meta, theme_aulav2{{/str}}</p>
+                            <h3>{{#str}}series_2_title, theme_aulav2{{/str}}</h3>
+                            <p class="aulav2-desc">{{#str}}series_2_desc, theme_aulav2{{/str}}</p>
+                            <a class="aulav2-btn" href="#">{{#str}}explore, theme_aulav2{{/str}}</a>
+                        </div>
+                    </article>
+                    <article class="aulav2-card aulav2-series">
+                        <div class="aulav2-ph"></div>
+                        <div class="aulav2-card__pad">
+                            <p class="aulav2-meta">{{#str}}series_3_meta, theme_aulav2{{/str}}</p>
+                            <h3>{{#str}}series_3_title, theme_aulav2{{/str}}</h3>
+                            <p class="aulav2-desc">{{#str}}series_3_desc, theme_aulav2{{/str}}</p>
+                            <a class="aulav2-btn" href="#">{{#str}}explore, theme_aulav2{{/str}}</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="aulav2-center-cta">
+                <a class="aulav2-btn aulav2-btn--solid" href="#">{{#str}}all_collections, theme_aulav2{{/str}}</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="aulav2-temas">
+        <div class="aulav2-wrap">
+            <h2 class="aulav2-section-title">{{#str}}temas_title, theme_aulav2{{/str}}</h2>
+            <div class="aulav2-temas__grid">
+                {{#home.temas}}
+                <article class="aulav2-tema">
+                    <div class="aulav2-tema__bar"></div>
+                    <div>
+                        <svg class="aulav2-tema__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                            <circle cx="12" cy="12" r="9"/>
+                        </svg>
+                        <h3>{{title}}</h3>
+                        <p>{{desc}}</p>
+                        <span class="aulav2-tema__count">{{count}}</span>
+                    </div>
+                </article>
+                {{/home.temas}}
+            </div>
+        </div>
+    </section>
+
+    <section class="aulav2-ruta">
+        <div class="aulav2-wrap aulav2-ruta__grid">
+            <div>
+                <h2>{{#str}}ruta_title, theme_aulav2{{/str}}</h2>
+                <p class="aulav2-ruta__lead">{{#str}}ruta_lead, theme_aulav2{{/str}}</p>
+                <a class="aulav2-btn" href="#">{{#str}}ruta_cta, theme_aulav2{{/str}}</a>
+            </div>
+            <div class="aulav2-ruta-list">
+                {{#home.ruta_steps}}
+                <div class="aulav2-ruta-item">
+                    <div class="aulav2-ruta-item__thumb"></div>
+                    <div>
+                        <strong>{{.}}</strong>
+                        <span>{{#str}}ruta_capsule, theme_aulav2{{/str}}</span>
+                    </div>
+                </div>
+                {{/home.ruta_steps}}
+            </div>
+        </div>
+    </section>
+
+    <section class="aulav2-rec">
+        <div class="aulav2-wrap">
+            <h2 class="aulav2-section-title">{{#str}}rec_title, theme_aulav2{{/str}}</h2>
+            <div class="aulav2-rec__grid">
+                <article class="aulav2-card aulav2-rec-card">
+                    <div class="aulav2-ph"><span class="aulav2-badge">{{#str}}badge_curso, theme_aulav2{{/str}}</span></div>
+                    <div class="aulav2-card__pad">
+                        <h3>{{#str}}rec_1_title, theme_aulav2{{/str}}</h3>
+                        <p class="aulav2-desc">{{#str}}rec_1_desc, theme_aulav2{{/str}}</p>
+                        <div class="aulav2-tags">
+                            <span class="aulav2-tag">{{#str}}rec_1_tag1, theme_aulav2{{/str}}</span>
+                            <span class="aulav2-tag aulav2-tag--mute">{{#str}}rec_tag_ciudadania, theme_aulav2{{/str}}</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="aulav2-card aulav2-rec-card">
+                    <div class="aulav2-ph"><span class="aulav2-badge">{{#str}}badge_curso, theme_aulav2{{/str}}</span></div>
+                    <div class="aulav2-card__pad">
+                        <h3>{{#str}}rec_2_title, theme_aulav2{{/str}}</h3>
+                        <p class="aulav2-desc">{{#str}}rec_2_desc, theme_aulav2{{/str}}</p>
+                        <div class="aulav2-tags">
+                            <span class="aulav2-tag">{{#str}}rec_2_tag1, theme_aulav2{{/str}}</span>
+                            <span class="aulav2-tag aulav2-tag--mute">{{#str}}rec_tag_ciudadania, theme_aulav2{{/str}}</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="aulav2-card aulav2-rec-card">
+                    <div class="aulav2-ph"><span class="aulav2-badge">{{#str}}badge_curso, theme_aulav2{{/str}}</span></div>
+                    <div class="aulav2-card__pad">
+                        <h3>{{#str}}rec_3_title, theme_aulav2{{/str}}</h3>
+                        <p class="aulav2-desc">{{#str}}rec_3_desc, theme_aulav2{{/str}}</p>
+                        <div class="aulav2-tags">
+                            <span class="aulav2-tag">{{#str}}rec_3_tag1, theme_aulav2{{/str}}</span>
+                            <span class="aulav2-tag aulav2-tag--mute">{{#str}}rec_tag_academia, theme_aulav2{{/str}}</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="aulav2-center-cta">
+                <a class="aulav2-btn aulav2-btn--solid" href="#">{{#str}}rec_cta, theme_aulav2{{/str}}</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="aulav2-faqs">
+        <div class="aulav2-faq-frame">
+            <div class="aulav2-faq-list" data-aulav2-faq>
+                <button class="aulav2-faq-item is-open" type="button">
+                    <span class="aulav2-faq-item__icon"><img src="{{home.pix.faq_icon}}" alt=""></span>
+                    <span class="aulav2-faq-item__body">
+                        <strong>{{#str}}faq_q, theme_aulav2{{/str}}</strong>
+                        <p>{{home.faq_answer}}</p>
+                    </span>
+                </button>
+                <button class="aulav2-faq-item" type="button">
+                    <span class="aulav2-faq-item__icon"><img src="{{home.pix.faq_icon}}" alt=""></span>
+                    <span class="aulav2-faq-item__body">
+                        <strong>{{#str}}faq_q, theme_aulav2{{/str}}</strong>
+                        <p>{{home.faq_answer}}</p>
+                    </span>
+                </button>
+                <button class="aulav2-faq-item" type="button">
+                    <span class="aulav2-faq-item__icon"><img src="{{home.pix.faq_icon}}" alt=""></span>
+                    <span class="aulav2-faq-item__body">
+                        <strong>{{#str}}faq_q, theme_aulav2{{/str}}</strong>
+                        <p>{{home.faq_answer}}</p>
+                    </span>
+                </button>
+                <button class="aulav2-faq-item" type="button">
+                    <span class="aulav2-faq-item__icon"><img src="{{home.pix.faq_icon}}" alt=""></span>
+                    <span class="aulav2-faq-item__body">
+                        <strong>{{#str}}faq_q, theme_aulav2{{/str}}</strong>
+                        <p>{{home.faq_answer}}</p>
+                    </span>
+                </button>
+            </div>
+            <h2 class="aulav2-faq-title">{{#str}}faq_title, theme_aulav2{{/str}}</h2>
+        </div>
+    </section>
+</div>
+
