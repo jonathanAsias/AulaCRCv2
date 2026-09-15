@@ -373,7 +373,135 @@ function theme_aulav2_pix_url(string $name): string {
 }
 
 /**
- * Mustache context for the mockup frontpage.
+ * Overview image URL for a course, or empty string.
+ *
+ * @param stdClass $course
+ * @return string
+ */
+function theme_aulav2_course_image_url(stdClass $course): string {
+    try {
+        $list = new \core_course_list_element($course);
+        foreach ($list->get_course_overviewfiles() as $file) {
+            if (!$file->is_valid_image()) {
+                continue;
+            }
+            return (string) \moodle_url::make_pluginfile_url(
+                $file->get_contextid(),
+                $file->get_component(),
+                $file->get_filearea(),
+                null,
+                $file->get_filepath(),
+                $file->get_filename()
+            );
+        }
+    } catch (\Throwable $e) {
+        return '';
+    }
+    return '';
+}
+
+/**
+ * Visible top-level categories for the frontpage.
+ *
+ * @param int $limit
+ * @return array<int, array{id:int,name:string,desc:string,url:string,count:int,countlabel:string}>
+ */
+function theme_aulav2_get_frontpage_categories(int $limit = 8): array {
+    $out = [];
+    try {
+        $top = \core_course_category::top();
+        foreach ($top->get_children() as $cat) {
+            if (!$cat->is_uservisible()) {
+                continue;
+            }
+            $desc = '';
+            if (!empty($cat->description)) {
+                $desc = content_to_text($cat->description, $cat->descriptionformat ?? FORMAT_HTML);
+                $desc = trim($desc);
+                if (\core_text::strlen($desc) > 140) {
+                    $desc = \core_text::substr($desc, 0, 137) . '…';
+                }
+            }
+            $count = (int) $cat->get_courses_count();
+            $out[] = [
+                'id' => (int) $cat->id,
+                'name' => $cat->get_formatted_name(),
+                'desc' => $desc,
+                'url' => (new \moodle_url('/course/index.php', ['categoryid' => $cat->id]))->out(false),
+                'count' => $count,
+                'countlabel' => get_string('recursos_n', 'theme_aulav2', $count),
+            ];
+            if (count($out) >= $limit) {
+                break;
+            }
+        }
+    } catch (\Throwable $e) {
+        return [];
+    }
+    return $out;
+}
+
+/**
+ * Visible courses for the frontpage (excludes site course).
+ *
+ * @param int $limit
+ * @return array<int, array{id:int,name:string,shortname:string,summary:string,url:string,imageurl:string,category:string,hasimage:bool}>
+ */
+function theme_aulav2_get_frontpage_courses(int $limit = 12): array {
+    global $CFG;
+    require_once($CFG->dirroot . '/course/lib.php');
+
+    $out = [];
+    try {
+        $courses = get_courses('all', 'c.sortorder ASC', 'c.id,c.fullname,c.shortname,c.summary,c.visible,c.category,c.summaryformat');
+        foreach ($courses as $course) {
+            if ((int) $course->id === (int) SITEID) {
+                continue;
+            }
+            $context = \context_course::instance($course->id);
+            if (empty($course->visible) && !has_capability('moodle/course:viewhiddencourses', $context)) {
+                continue;
+            }
+            $summary = '';
+            if (!empty($course->summary)) {
+                $summary = format_string($course->summary, true, ['context' => $context]);
+                $summary = trim(html_to_text($summary, 0, false));
+                if (\core_text::strlen($summary) > 160) {
+                    $summary = \core_text::substr($summary, 0, 157) . '…';
+                }
+            }
+            $catname = '';
+            try {
+                $cat = \core_course_category::get($course->category, IGNORE_MISSING);
+                if ($cat) {
+                    $catname = $cat->get_formatted_name();
+                }
+            } catch (\Throwable $e) {
+                $catname = '';
+            }
+            $image = theme_aulav2_course_image_url($course);
+            $out[] = [
+                'id' => (int) $course->id,
+                'name' => format_string($course->fullname, true, ['context' => $context]),
+                'shortname' => format_string($course->shortname, true, ['context' => $context]),
+                'summary' => $summary,
+                'url' => (new \moodle_url('/course/view.php', ['id' => $course->id]))->out(false),
+                'imageurl' => $image,
+                'hasimage' => $image !== '',
+                'category' => $catname,
+            ];
+            if (count($out) >= $limit) {
+                break;
+            }
+        }
+    } catch (\Throwable $e) {
+        return [];
+    }
+    return $out;
+}
+
+/**
+ * Mustache context for the mockup frontpage (live categories + courses).
  *
  * @return array
  */
@@ -404,6 +532,92 @@ function theme_aulav2_get_frontpage_context(): array {
         $headerlogo = '';
     }
 
+    $categories = theme_aulav2_get_frontpage_categories(8);
+    $courses = theme_aulav2_get_frontpage_courses(12);
+
+    // Audiences = top categories (up to 5).
+    $audiences = [];
+    foreach (array_slice($categories, 0, 5) as $cat) {
+        $audiences[] = [
+            'label' => $cat['name'],
+            'url' => $cat['url'],
+        ];
+    }
+    // Fallback labels if no categories yet.
+    if ($audiences === []) {
+        $audiences = [
+            ['label' => get_string('audience_ciudadania', 'theme_aulav2'), 'url' => $catalog],
+            ['label' => get_string('audience_industria', 'theme_aulav2'), 'url' => $catalog],
+            ['label' => get_string('audience_equipo', 'theme_aulav2'), 'url' => $catalog],
+            ['label' => get_string('audience_entidades', 'theme_aulav2'), 'url' => $catalog],
+            ['label' => get_string('audience_academia', 'theme_aulav2'), 'url' => $catalog],
+        ];
+    }
+
+    // Temas = categories with counts.
+    $temas = [];
+    foreach ($categories as $cat) {
+        $temas[] = [
+            'title' => $cat['name'],
+            'desc' => $cat['desc'] !== '' ? $cat['desc'] : get_string('categorycourses', 'theme_aulav2', $cat['count']),
+            'count' => $cat['countlabel'],
+            'url' => $cat['url'],
+        ];
+    }
+    if ($temas === []) {
+        $temas = [
+            [
+                'title' => get_string('tema_proteccion', 'theme_aulav2'),
+                'desc' => get_string('tema_proteccion_desc', 'theme_aulav2'),
+                'count' => get_string('recursos_n', 'theme_aulav2', 0),
+                'url' => $catalog,
+            ],
+        ];
+    }
+
+    // Search tags from category names.
+    $searchtags = [];
+    foreach (array_slice($categories, 0, 4) as $cat) {
+        $searchtags[] = $cat['name'];
+    }
+    if ($searchtags === []) {
+        $searchtags = [
+            get_string('tag_calidad', 'theme_aulav2'),
+            get_string('tag_pqr', 'theme_aulav2'),
+            get_string('tag_fraude', 'theme_aulav2'),
+            get_string('tag_portabilidad', 'theme_aulav2'),
+        ];
+    }
+
+    $featured = $courses[0] ?? null;
+    $series = array_slice($courses, 1, 3);
+    $recommended = array_slice($courses, 0, 3);
+    if (count($courses) > 3) {
+        $recommended = array_slice($courses, 3, 3);
+        if (count($recommended) < 3) {
+            $recommended = array_slice($courses, 0, 3);
+        }
+    }
+
+    // Ruta steps: first courses as learning path, else static strings.
+    $rutasteps = [];
+    foreach (array_slice($courses, 0, 4) as $i => $course) {
+        $rutasteps[] = [
+            'label' => ($i + 1) . '. ' . $course['name'],
+            'url' => $course['url'],
+            'imageurl' => $course['imageurl'],
+            'hasimage' => $course['hasimage'],
+        ];
+    }
+    if ($rutasteps === []) {
+        $rutasteps = [
+            ['label' => get_string('ruta_1', 'theme_aulav2'), 'url' => $catalog, 'imageurl' => '', 'hasimage' => false],
+            ['label' => get_string('ruta_2', 'theme_aulav2'), 'url' => $catalog, 'imageurl' => '', 'hasimage' => false],
+            ['label' => get_string('ruta_3', 'theme_aulav2'), 'url' => $catalog, 'imageurl' => '', 'hasimage' => false],
+            ['label' => get_string('ruta_4', 'theme_aulav2'), 'url' => $catalog, 'imageurl' => '', 'hasimage' => false],
+        ];
+    }
+
     return [
         'aulav2_frontpage' => true,
         'home' => [
@@ -426,75 +640,16 @@ function theme_aulav2_get_frontpage_context(): array {
             'search_placeholder' => get_string('search_placeholder', 'theme_aulav2'),
             'webcrc_url' => $webcrc,
             'catalog_url' => $catalog,
-            'audiences' => [
-                ['label' => get_string('audience_ciudadania', 'theme_aulav2')],
-                ['label' => get_string('audience_industria', 'theme_aulav2')],
-                ['label' => get_string('audience_equipo', 'theme_aulav2')],
-                ['label' => get_string('audience_entidades', 'theme_aulav2')],
-                ['label' => get_string('audience_academia', 'theme_aulav2')],
-            ],
-            'search_tags' => [
-                get_string('tag_calidad', 'theme_aulav2'),
-                get_string('tag_pqr', 'theme_aulav2'),
-                get_string('tag_fraude', 'theme_aulav2'),
-                get_string('tag_portabilidad', 'theme_aulav2'),
-            ],
-            'temas' => [
-                [
-                    'title' => get_string('tema_proteccion', 'theme_aulav2'),
-                    'desc' => get_string('tema_proteccion_desc', 'theme_aulav2'),
-                    'count' => get_string('recursos_n', 'theme_aulav2', 26),
-                    'icon' => 'shield',
-                ],
-                [
-                    'title' => get_string('tema_comunicaciones', 'theme_aulav2'),
-                    'desc' => get_string('tema_comunicaciones_desc', 'theme_aulav2'),
-                    'count' => get_string('recursos_n', 'theme_aulav2', 22),
-                    'icon' => 'globe',
-                ],
-                [
-                    'title' => get_string('tema_audiovisuales', 'theme_aulav2'),
-                    'desc' => get_string('tema_audiovisuales_desc', 'theme_aulav2'),
-                    'count' => get_string('recursos_n', 'theme_aulav2', 18),
-                    'icon' => 'tv',
-                ],
-                [
-                    'title' => get_string('tema_postal', 'theme_aulav2'),
-                    'desc' => get_string('tema_postal_desc', 'theme_aulav2'),
-                    'count' => get_string('recursos_n', 'theme_aulav2', 11),
-                    'icon' => 'mail',
-                ],
-                [
-                    'title' => get_string('tema_competencia', 'theme_aulav2'),
-                    'desc' => get_string('tema_competencia_desc', 'theme_aulav2'),
-                    'count' => get_string('recursos_n', 'theme_aulav2', 26),
-                    'icon' => 'chart',
-                ],
-                [
-                    'title' => get_string('tema_datos', 'theme_aulav2'),
-                    'desc' => get_string('tema_datos_desc', 'theme_aulav2'),
-                    'count' => get_string('recursos_n', 'theme_aulav2', 17),
-                    'icon' => 'data',
-                ],
-                [
-                    'title' => get_string('tema_innovacion', 'theme_aulav2'),
-                    'desc' => get_string('tema_innovacion_desc', 'theme_aulav2'),
-                    'count' => get_string('recursos_n', 'theme_aulav2', 12),
-                    'icon' => 'pulse',
-                ],
-                [
-                    'title' => get_string('tema_gestion', 'theme_aulav2'),
-                    'desc' => get_string('tema_gestion_desc', 'theme_aulav2'),
-                    'count' => get_string('recursos_n', 'theme_aulav2', 9),
-                    'icon' => 'gear',
-                ],
-            ],
-            'ruta_steps' => [
-                get_string('ruta_1', 'theme_aulav2'),
-                get_string('ruta_2', 'theme_aulav2'),
-                get_string('ruta_3', 'theme_aulav2'),
-                get_string('ruta_4', 'theme_aulav2'),
-            ],
+            'has_courses' => $courses !== [],
+            'has_categories' => $categories !== [],
+            'audiences' => $audiences,
+            'search_tags' => $searchtags,
+            'featured' => $featured,
+            'series' => $series,
+            'temas' => $temas,
+            'ruta_steps' => $rutasteps,
+            'ruta_cta_url' => $featured['url'] ?? $catalog,
+            'recommended' => $recommended,
             'faq_answer' => get_string('faq_answer', 'theme_aulav2'),
         ],
     ];

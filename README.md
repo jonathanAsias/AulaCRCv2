@@ -2,6 +2,11 @@
 
 Tema hijo de **Boost** (Moodle 4.5) con la portada del mockup Aula CRC. Independiente de `theme_aulacrc`.
 
+## 1.0.3
+
+- Hook-safe: depende de AulaCRC ≥ 4.5.73 en el mismo Moodle (el hook ya no rompe AulaV2).
+- Portada con **categorías y cursos reales**: audiencias, temas, colecciones, ruta y recomendados.
+
 ## 1.0.2
 
 - La franja de navegación del home muestra el menú primario de Moodle (Página principal, Administración del sitio, etc.), con menú móvil, usuario e idioma.

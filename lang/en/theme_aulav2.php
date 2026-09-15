@@ -41,6 +41,9 @@ $string['site_font_customoption'] = 'Custom (Google Fonts)';
 $string['nav_home'] = 'Home';
 $string['nav_catalog'] = 'Resource catalogue';
 $string['nav_webcrc'] = 'Go to CRC site';
+$string['nocoursesyet'] = 'No visible courses yet. Create courses and categories in Moodle to fill this section.';
+$string['categorycourses'] = '{$a} courses in this category';
+
 $string['webcrc_url'] = 'CRC site URL';
 $string['webcrc_urldesc'] = 'Link for the “Go to CRC site” button in the home header.';
 $string['catalog_url'] = 'Catalogue URL';

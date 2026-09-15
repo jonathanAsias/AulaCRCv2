@@ -25,11 +25,11 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'theme_aulav2';
-$plugin->version = 2026091402;
+$plugin->version = 2026091403;
 $plugin->requires = 2024100700; // Moodle 4.5.
 $plugin->supported = [405, 405];
 $plugin->maturity = MATURITY_BETA;
-$plugin->release = '1.0.2';
+$plugin->release = '1.0.3';
 $plugin->dependencies = [
     'theme_boost' => 2024100700,
 ];
